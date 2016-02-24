@@ -11,6 +11,7 @@ end
 MyApp.post "/user/create" do
   @user = User.new(name: params["name"], email: params["email"], password: params["password"])
   @user.save
+  @message = "#{@user.name} successfully created!"
   erb :"users/added"
 end
 
@@ -20,7 +21,24 @@ MyApp.get "/users/view" do
 end
 
 
-MyApp.get "/users/view/:id" do
+MyApp.get "/user/view/:id" do
   @user = User.find_by_id(params[:id])
   erb :"users/view"
 end
+
+MyApp.get "/user/update/:id" do
+  @user = User.find_by_id(params[:id])
+  erb :"users/update"
+end
+
+MyApp.post "/user/update/:id" do
+  @user = User.find_by_id(params[:id])
+  @user.assign_attributes(name: params["name"], email: params["email"], password: params["password"])
+  
+  @user.save
+  @message = "#{@user.name} updated."
+  erb :"users/added"
+end
+
+
+

@@ -1,0 +1,19 @@
+<center><h1>Update <%=@user.name%></h1></center>
+
+<p>
+<center>
+
+<form style="width: 500px" method="post" action="/user/update/<%= @user.id %>">
+<fieldset>
+<legend>User Details:</legend>
+<b>Update Your Name:
+<br><input type="text" name="name" value="<%= @user.name %>"><br>
+<br>Update Your Email Address:
+<br><input type="text" name="email" value="<%= @user.email %>"><br>
+<br>Change Your Password, this is SUPER secure, promise:
+<br><input type="text" name="password" value="<%= @user.password %>"><br>
+<br>
+<input type="submit" value="Update <%= @user.name %>"></b>
+</fieldset>
+</form></center>
+</p>

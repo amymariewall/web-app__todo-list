@@ -34,11 +34,23 @@ end
 MyApp.post "/user/update/:id" do
   @user = User.find_by_id(params[:id])
   @user.assign_attributes(name: params["name"], email: params["email"], password: params["password"])
+  if @user.is_valid == true
+    @user.save
+    @message = "#{@user.name} updated."
+    
+    erb :"users/added"
   
-  @user.save
-  @message = "#{@user.name} updated."
-  erb :"users/added"
+  else
+    @invalid_user = User.find_by_id(params[:id])
+    @invalid_user.assign_attributes(name: params["name"], email: params["email"], password: params["password"])
+    @errors = @invalid_user.get_errors
+    binding.pry
+    @user = User.find_by_id(params[:id])
+    @user.assign_attributes(name: @user.name, email: @user.email, password: @user.password)   
+    erb :"users/update"
+  end
 end
+
 
 
 

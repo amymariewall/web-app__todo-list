@@ -13,3 +13,14 @@ MyApp.post "/user/create" do
   @user.save
   erb :"users/added"
 end
+
+MyApp.get "/users/view" do
+  @users = User.all
+  erb :"users/view_all"
+end
+
+
+MyApp.get "/users/view/:id" do
+  @user = User.find_by_id(params[:id])
+  erb :"users/view"
+end

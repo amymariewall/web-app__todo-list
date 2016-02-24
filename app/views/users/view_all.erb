@@ -3,5 +3,10 @@
     <ul>
       <li><a href="/user/view/<%= u.id %>"><%= u.name %></a></li>
       <li><a href="/user/update/<%= u.id %>">Update</a></li>
+      <li><form method="post" action="/user/delete/<%= u.id %>">
+      <input type="submit" value="Delete <%= u.name %>">
+      </form>
+
+      </li>
     </ul>
   <% end %>

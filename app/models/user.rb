@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-#See if there is a way to pass in the values that params gave us as arguments here
-
+#See if there is a way to pass in the values that params gave us as arguments   here
+  
   def set_errors
     errors = []
     if self.name == ""
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     if self.password == ""
       errors << "Password cannot be blank"
     end
-    
+
     return errors
   end
 

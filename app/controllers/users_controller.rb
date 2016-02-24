@@ -44,12 +44,19 @@ MyApp.post "/user/update/:id" do
     @invalid_user = User.find_by_id(params[:id])
     @invalid_user.assign_attributes(name: params["name"], email: params["email"], password: params["password"])
     @errors = @invalid_user.get_errors
-    binding.pry
     @user = User.find_by_id(params[:id])
     @user.assign_attributes(name: @user.name, email: @user.email, password: @user.password)   
     erb :"users/update"
   end
 end
+
+MyApp.post "/user/delete/:id" do
+  @user = User.find_by_id(params[:id])
+  @message = "#{@user.name} deleted."
+  @user.delete
+  erb :"users/added" 
+end
+
 
 
 

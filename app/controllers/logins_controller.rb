@@ -19,3 +19,8 @@ MyApp.post "/login/create" do
     erb :"logins/failed"
   end
 end
+
+MyApp.get "/logout" do
+  session["user_id"] = nil
+  erb :"logins/logout_successful"
+end

@@ -5,5 +5,8 @@
 <a href="/user/add">Add User</a>
 <a href="/login">Login</a>
 <a href="/users/view">View Users</a>
+<% if session["user_id"] != nil %>
+  <a href="/logout">Logout</a>
+  <% end %>
 </center>
 </p>

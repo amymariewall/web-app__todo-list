@@ -42,7 +42,7 @@ MyApp.post "/todos/delete/:todo_id" do
   @todo = Todo.find_by_id(params["todo_id"])
   @message = "#{@todo.title} successfully deleted."
   @todo.delete
-  erb :"todos/added"
+  redirect "/todos/view"
 
 end
 

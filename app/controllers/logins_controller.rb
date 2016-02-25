@@ -11,12 +11,15 @@ MyApp.get "/login" do
 end
 
 MyApp.post "/login/create" do
-  @user = User.find_by_email(params["email"])
-  if @user.password == params["password"]
+  if User.login_valid(params["email"], params["password"]) == false
+    @errors = User.get_login_errors
+    binding.pry
+  erb :"logins/new"
+
+  else 
+    @user = User.get_current_user
     session["user_id"] = @user.id
-  erb :"logins/success"
-  else
-    erb :"logins/failed"
+    redirect "/"
   end
 end
 

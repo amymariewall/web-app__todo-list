@@ -3,6 +3,12 @@
 <p>
 <center>
 
+<% if @errors != nil %>
+  <% @errors.each do |e| %>
+  <%= e %>
+  <% end %>
+  <% end %>
+
 <form style="width: 500px" method="post" action="/login/create">
 <fieldset>
 <br>Enter Your Email Address:

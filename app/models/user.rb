@@ -37,6 +37,52 @@ class User < ActiveRecord::Base
     else
     return false
     end 
-  end  
+  end
+
+
+  def self.set_login_errors(email_value, password_value)
+    @errors = []
+   
+    @user = self.find_by_email(email_value)
+
+    if @user == nil 
+      @errors << "No user with that email address. Please enter a valid email address."
+    end
+
+    if email_value == ""
+      @errors << "Please enter your email address."
+    end
+    
+    if password_value == ""
+      @errors << "Please enter your password."
+    end
+
+    if @user != nil
+      if @user.password != password_value
+      @errors << "Invalid password."
+      end 
+    end
+  end
+
+
+  def self.login_valid(email_value, password_value)
+    self.set_login_errors(email_value, password_value) 
+    if @errors == []
+    return true
+    else
+    return false
+    end 
+  end
+
+
+  def self.get_login_errors
+    return @errors
+  end
+
+  def self.get_current_user
+    return @user
+  end
+
+
 
 end

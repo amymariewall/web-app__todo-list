@@ -14,14 +14,15 @@ MyApp.post "/todo/create" do
 end
 
 MyApp.get "/todos/view" do 
-    @todos = Todo.all
+    @uncompleted_todos = Todo.where({"completed" => false})
+    @completed_todos = Todo.where({"completed" => true})
     erb :"todos/view_all"
   end
 
 MyApp.post "/todos/update" do
   todos = Todo.where("id" => params["todos"])
   todos.update_all(completed: true)
-  @message = "Great work completing #{todos}!"
-  binding.pry
+  @todos = Todo.get_titles(todos)
+  @message = "Great work completing: #{@todos}!"
   erb :"todos/added"
 end

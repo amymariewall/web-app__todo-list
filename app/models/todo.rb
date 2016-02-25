@@ -6,4 +6,12 @@ class Todo < ActiveRecord::Base
     return y
   end
 
+  def self.get_titles(active_record_collection_of_todos)
+    todos = ""
+    active_record_collection_of_todos.each do |t| 
+      todos << "#{t.title} "
+    end
+    return todos
+  end
+
 end

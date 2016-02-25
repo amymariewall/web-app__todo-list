@@ -10,9 +10,15 @@ end
 
 MyApp.post "/user/create" do
   @user = User.new(name: params["name"], email: params["email"], password: params["password"])
-  @user.save
-  @message = "#{@user.name} successfully created!"
-  erb :"users/added"
+
+  if @user.is_valid == true
+    @user.save
+    redirect "/users/view"
+
+  else
+    @errors = @user.get_errors   
+    erb :"users/add"
+  end
 end
 
 MyApp.get "/users/view" do
@@ -23,6 +29,8 @@ end
 
 MyApp.get "/user/view/:id" do
   @user = User.find_by_id(params[:id])
+  @completed_todos = Todo.where({"user_id" => params[:id]}, {"completed" => true})
+  @uncompleted_todos = Todo.where({"user_id" => params[:id]}, {"completed" => false})
   erb :"users/view"
 end
 
@@ -36,9 +44,9 @@ MyApp.post "/user/update/:id" do
   @user.assign_attributes(name: params["name"], email: params["email"], password: params["password"])
   if @user.is_valid == true
     @user.save
-    @message = "#{@user.name} updated."
+    #@message = "#{@user.name} updated."
     
-    erb :"users/added"
+    redirect "/user/view/#{@user.id}"
   
   else
     @invalid_user = User.find_by_id(params[:id])
@@ -54,7 +62,7 @@ MyApp.post "/user/delete/:id" do
   @user = User.find_by_id(params[:id])
   @message = "#{@user.name} deleted."
   @user.delete
-  erb :"users/added" 
+  redirect "/users/view" 
 end
 
 

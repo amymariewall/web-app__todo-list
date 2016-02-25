@@ -1,5 +1,11 @@
 <center><h1>Add A User</h1></center>
 
+<% if @errors != nil %>
+  <% @errors.each do |e| %>
+  <%= e %>
+  <% end %>
+  <% end %>
+
 <p>
 <center>
 

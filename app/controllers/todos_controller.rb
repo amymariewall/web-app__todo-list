@@ -39,9 +39,9 @@ MyApp.post "/todos/update" do
 end
 
 MyApp.post "/todos/delete/:todo_id" do
-  todo = Todo.find_by_id(params["todo_id"])
-  @message = "#{todo} successfully deleted."
-  todo.delete
+  @todo = Todo.find_by_id(params["todo_id"])
+  @message = "#{@todo.title} successfully deleted."
+  @todo.delete
   erb :"todos/added"
 
 end

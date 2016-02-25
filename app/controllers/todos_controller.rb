@@ -6,11 +6,17 @@ MyApp.get "/todo/add" do
 end
 
 MyApp.post "/todo/create" do
+  @curent_user = User.find_by_id(session["user_id"]) 
+    if @current_user != nil
+      binding.pry
   todo = Todo.new(title: params["title"], description: params["description"], user_id: params["user_id"], completed: false)
   todo.save
   @message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
-  binding.pry
-  erb :"todos/added"  
+  erb :"todos/added"
+
+    else
+    erb :"logins/must_login"
+    end  
 end
 
 MyApp.get "/todos/view" do 

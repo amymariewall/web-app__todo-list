@@ -3,15 +3,25 @@
 <% if @uncompleted_todos == [] %>
   <h2> All To Dos Are Done! </h2>
   <% else %>
+  
+<h2> Uncompleted Tasks </h2>
+
+  <% @uncompleted_todos.each do |t| %>
   <form method="post" action="/todos/update">
-        <% @uncompleted_todos.each do |t| %>
     <input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %>
-    <br>
-   <% end %>
-   <br>
-   <input type="submit" value="Mark These Tasks Completed">
+      <br>
+    <% end %>
+    <input type="submit" value="Mark These Tasks Completed">
   </form>
+<br>
+<br>
+  <% @uncompleted_todos.each do |t| %>
+    <form method="post" action="/todos/delete/<%= t.id %>">
+      <input type="submit" value="delete <%= t.title %>">
+    </form>
   <% end %>
+<% end %>
+       
 
 <h2>Completed Tasks:</h2>
 
@@ -29,3 +39,8 @@
       </tr>
       <% end %>
 </table>
+
+
+
+
+

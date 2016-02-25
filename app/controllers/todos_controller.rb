@@ -16,8 +16,8 @@ MyApp.post "/todo/create" do
       
     todo = Todo.new(title: params["title"], description: params["description"], user_id: params["user_id"], completed: false)
     todo.save
-    @message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
-    erb :"todos/added"
+    #@message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
+    redirect "/todos/view"
 
     else
     erb :"logins/must_login"
@@ -34,8 +34,8 @@ MyApp.post "/todos/update" do
   todos = Todo.where("id" => params["todos"])
   todos.update_all(completed: true)
   @todos = Todo.get_titles(todos)
-  @message = "Great work completing: #{@todos}!"
-  erb :"todos/added"
+  #@message = "Great work completing: #{@todos}!"
+  redirect "/todos/view"
 end
 
 MyApp.post "/todos/delete/:todo_id" do

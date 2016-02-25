@@ -1,0 +1,10 @@
+<h1>All To Dos:</h1>
+
+  <form method="post" action="/todos/update">
+        <% @todos.each do |t| %>
+    <input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %>
+    <br>
+   <% end %>
+   <br>
+   <input type="submit" value="Update To Do List Progress">
+  </form>

@@ -1,10 +1,4 @@
 <center><h1>Add A Category</h1></center>
-<!-- 
-<%# if @errors != nil %>
-  <%# @errors.each do |e| %>
-  <%#= e %>
-  <% #end %>
-  <% #end %> -->
 
 <p>
 <center>
@@ -14,11 +8,15 @@
 <legend>Category Details:</legend>
 <b>Enter a Category Name:
 <br><input type="text" name="category_name" placeholder="Category Name"><br>
-<br>Assign tasks to this category:
+<br>Assign tasks to this category:<br>
 <br><% @todos.each do |t| %>
-    <input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %> <%= t.category_name %>
+    <input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %> 
+    <% if t.category_id != nil %>
+    <i>Currently assigned to <%= t.category_name %></i>
+    <% end %>
       <br>
     <% end %>
+    <br>
 <input type="submit" value="Create Category"></b>
 </fieldset>
 </form></center>

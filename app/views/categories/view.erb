@@ -2,5 +2,13 @@
 
 <% if @categories != [] %>
   <% @categories.each do |c| %>
-  <%= c %><br>
-  <% end %>
+  - <b><%= c.category_name %></b> - <br>
+    <% if c.get_todos != [] %>
+    Todo Items:<br><br>
+    <% c.get_todos.each do |t| %>
+      <%= t %><br>
+        <% end %>
+      <% end %>
+      <br>
+    <% end %>
+<% end %>

@@ -6,6 +6,12 @@ class Todo < ActiveRecord::Base
     return y
   end
 
+  def category_name
+    x = Category.find_by_id(self.category_id)
+    y = x.category_name
+    return y
+  end
+
   def self.get_titles(active_record_collection_of_todos)
     todos = ""
     active_record_collection_of_todos.each do |t| 

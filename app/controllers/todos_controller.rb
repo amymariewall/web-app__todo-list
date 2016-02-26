@@ -15,7 +15,8 @@ MyApp.post "/todo/create" do
     @current_user = User.find_by_id(session["user_id"]) 
     if @current_user != nil
       
-    todo = Todo.new(title: params["title"], description: params["description"], user_id: params["user_id"], assigner_user_id: session["user_id"], category_id: params["category_id"], completed: false)
+    todo = Todo.new(title: params["title"], description: params["description"], created_by_user_id: session["user_id"], category_id: params["category_id"], completed: false)
+    # new assignment with specified user id from params and newly created todo #item
     todo.save
     #@message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
     redirect "/todos/view"

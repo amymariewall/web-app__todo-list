@@ -12,6 +12,8 @@ DB.define_column("todos", "completed", "boolean")
 DB.define_column("todos", "created_by_user_id", "integer")
 DB.define_column("todos", "category_id", "integer")
 
+# Figure out the best way to implement a validation where the assigned by #user_id must belong to a user who has task assignment permissions
+
 DB.define_table("assignments")
 DB.define_column("assignments", "todo_id", "integer")
 DB.define_column("assignments", "assigned_by_user_id", "integer")

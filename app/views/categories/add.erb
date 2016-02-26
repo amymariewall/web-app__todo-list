@@ -15,13 +15,11 @@
 <b>Enter a Category Name:
 <br><input type="text" name="category_name" placeholder="Category Name"><br>
 <br>Assign tasks to this category:
-<br><select name="user_id">
-  <option selected disabled>Select a user...</option>
-  <% @users.each do |u| %>
-  <option value="<%=u.id%>"><%= u.name %></option>
-  <% end %>
-</select>
-<input type="submit" value="Create User"></b>
+<br><% @todos.each do |t| %>
+    <input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %> <%= t.category_name %>
+      <br>
+    <% end %>
+<input type="submit" value="Create Category"></b>
 </fieldset>
 </form></center>
 </p>

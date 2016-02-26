@@ -21,4 +21,15 @@ MyApp.get "/categories/view" do
   erb :"categories/view"
 end
 
+MyApp.get "/category/update/:id" do 
+  @category = Category.find_by_id(params[:id])
+  @todos = @category.get_todos
+  erb :"categories/update"
+end
 
+MyApp.post "/category/process/update/:category_id" do
+  Category.update(params[:category_id], category_name: params["category_name"] )
+  todos = Todo.where("id" => params["todos"])
+  todos.update_all(completed: true)
+  redirect "/categories/view"
+end

@@ -2,10 +2,10 @@
 
 <% if @categories != [] %>
   <% @categories.each do |c| %>
-  - <b><%= c.category_name %></b> - <br>
-    <% if c.get_todos != [] %>
+  - <b><%= c.category_name %></b><a href="/category/update/<%= c.id %>">Update</a>- <br>
+    <% if c.get_todo_titles != [] %>
     Todo Items:<br><br>
-    <% c.get_todos.each do |t| %>
+    <% c.get_todo_titles.each do |t| %>
       <%= t %><br>
         <% end %>
       <% end %>

@@ -1,0 +1,28 @@
+<center><h1>Update <%=@category.category_name%></h1></center>
+
+<p>
+<center>
+
+<% if @errors != nil %>
+  <% @errors.each do |e| %>
+  <%= e %>
+  <% end %>
+  <% end %>
+
+<form style="width: 500px" method="post" action="/category/process/update/<%= @category.id %>">
+<fieldset>
+<legend>User Details:</legend>
+<b>Update The Category Name:
+<br><input type="text" name="category_name" value="<%= @category.category_name %>"><br>
+<br>Check off Tasks in this Category:<br>
+<% if @todos != [] %>
+<% @todos.each do |t| %>
+<input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %>
+      <br>
+    <% end %>
+    <% end %>
+<input type="submit" value="Update <%= @category.category_name %>"></b>
+</fieldset>
+</form>
+</center>
+</p>

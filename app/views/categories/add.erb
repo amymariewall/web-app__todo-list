@@ -1,0 +1,27 @@
+<center><h1>Add A Category</h1></center>
+<!-- 
+<%# if @errors != nil %>
+  <%# @errors.each do |e| %>
+  <%#= e %>
+  <% #end %>
+  <% #end %> -->
+
+<p>
+<center>
+
+<form style="width: 500px" method="post" action="/category/create">
+<fieldset>
+<legend>Category Details:</legend>
+<b>Enter a Category Name:
+<br><input type="text" name="category_name" placeholder="Category Name"><br>
+<br>Assign tasks to this category:
+<br><select name="user_id">
+  <option selected disabled>Select a user...</option>
+  <% @users.each do |u| %>
+  <option value="<%=u.id%>"><%= u.name %></option>
+  <% end %>
+</select>
+<input type="submit" value="Create User"></b>
+</fieldset>
+</form></center>
+</p>

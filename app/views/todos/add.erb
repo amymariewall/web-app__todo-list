@@ -11,13 +11,9 @@
 <br>Enter a Task Description:
 <br><input type="text" name="description" placeholder="Task Description"><br>
 <br>Assign this Task:
-<select name="user_id">
-  <option selected disabled>Select a user...</option>
-  <% @users.each do |u| %>
-  <option value="<%=u.id%>"><%= u.name %></option>
-  <% end %>
-</select>
-<br>
+<% @users.each do |u| %>
+<input type="checkbox" name="users[]" value="<%= u.id %>"><%= u.name %>
+<% end %>
 <br>
 <select name="category_id">
   <option selected disabled>Select a category...</option>

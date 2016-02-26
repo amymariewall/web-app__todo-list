@@ -33,3 +33,11 @@ MyApp.post "/category/process/update/:category_id" do
   todos.update_all(completed: true)
   redirect "/categories/view"
 end
+
+MyApp.get "/category/view/:id" do 
+  @category = Category.find_by_id(params[:id])
+  @todos = @category.get_todos
+  @uncompleted_todos = Todo.where({"category_id" => @category.id}, {"completed" => false})
+  @completed_todos = Todo.where({"category_id" => @category.id}, {"completed" => true})
+  erb :"categories/view_single"
+end

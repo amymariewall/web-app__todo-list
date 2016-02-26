@@ -1,0 +1,47 @@
+<h1><%= @category.category_name %></h1>
+
+<% if @todos == [] %>
+  <h2> No Tasks in This Category! Assign some... </h2>
+<% end %>
+
+<% if @uncompleted_todos != [] %>
+
+<h2> Uncompleted Tasks </h2>
+
+  <% @uncompleted_todos.each do |t| %>
+  <form method="post" action="/todos/update">
+    <input type="checkbox" name="todos[]" value="<%= t.id %>"><%= t.title %>
+      <br>
+    <% end %>
+    <input type="submit" value="Mark These Tasks Completed">
+  </form>
+<br>
+<br>
+  <% @uncompleted_todos.each do |t| %>
+    <form method="post" action="/todos/delete/<%= t.id %>">
+      <input type="submit" value="delete <%= t.title %>">
+    </form>
+  <% end %>
+<% end %>
+
+
+
+<% if @completed_todos != [] %>
+
+<h2>Completed Tasks:</h2>
+
+<table>
+  <thead>
+    <th> Task </th>
+    <th> Description </th>
+  </thead>
+
+  <tbody>
+    <tr>
+      <% @completed_todos.each do |t| %>
+      <td> <%= t.title %> </td>
+      <td> <%= t.description %> </td>
+      </tr>
+      <% end %>
+</table>
+<% end %>

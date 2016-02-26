@@ -2,7 +2,8 @@
 
 <% if @categories != [] %>
   <% @categories.each do |c| %>
-  - <b><%= c.category_name %></b><a href="/category/update/<%= c.id %>">Update</a>- <br>
+  - <b><a href="/category/view/<%= c.id %>"><%= c.category_name %></a></b>
+   <a href="/category/update/<%= c.id %>">Update</a>- <br>
     <% if c.get_todo_titles != [] %>
     Todo Items:<br><br>
     <% c.get_todo_titles.each do |t| %>

@@ -18,6 +18,10 @@ MyApp.post "/todo/create" do
     todo = Todo.new(title: params["title"], description: params["description"], created_by_user_id: session["user_id"], category_id: params["category_id"], completed: false)
     # new assignment with specified user id from params and newly created todo #item
     todo.save
+    assignments = Assignment.create( assigned_to_user_id: params["users"])
+    binding.pry
+      ##do |u|
+    #u.is_admin = false
     #@message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
     redirect "/todos/view"
 

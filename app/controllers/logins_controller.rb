@@ -6,7 +6,12 @@
 # 
 # Reading and Updating a login, however, make a little less sense.
 
-MyApp.get "/login" do
+MyApp.before do
+  @message = params[:message]
+end
+
+MyApp.get "/login" do binding.pry
+
   erb :"logins/new"
 end
 

@@ -32,8 +32,8 @@ MyApp.get "/todos/view" do
       @completed_todos = Todo.where({"completed" => true})
       erb :"todos/view_all"
     else
-      @message = "Must login to view to-do items."  
-      erb :"logins/new" 
+      params[:message] = "Must login to view to-do items."  
+      redirect "/login" 
     end
   end
 

@@ -18,6 +18,15 @@
   <% end %>
 </select>
 <br>
+<br>
+<select name="category_id">
+  <option selected disabled>Select a category...</option>
+  <% @categories.each do |c| %>
+  <option value="<%=c.id%>"><%= c.category_name %></option>
+  <% end %>
+</select>
+<br>
+<br>
 <input type="submit" value="Create To Do"></b>
 </fieldset>
 </form></center>

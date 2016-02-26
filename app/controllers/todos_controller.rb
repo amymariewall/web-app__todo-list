@@ -1,12 +1,13 @@
 # This controller is for all the CRUD operations related to a Todo.
 
 MyApp.get "/todo/add" do
-  @current_user = User.find_by_id(session["user_id"])
+  @current_user = User.get_current_user
   if @current_user != nil
   @users = User.all
+  @categories = Category.all
   erb :"todos/add"
-  else
-    erb :"logins/must_login"
+  else  
+  redirect "/login"
   end
 end
 
@@ -14,20 +15,26 @@ MyApp.post "/todo/create" do
     @current_user = User.find_by_id(session["user_id"]) 
     if @current_user != nil
       
-    todo = Todo.new(title: params["title"], description: params["description"], user_id: params["user_id"], completed: false)
+    todo = Todo.new(title: params["title"], description: params["description"], user_id: params["user_id"], assigner_user_id: session["user_id"], category_id: params["category_id"], completed: false)
     todo.save
     #@message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
     redirect "/todos/view"
 
     else
-    erb :"logins/must_login"
+    redirect "/login"
     end  
 end
 
-MyApp.get "/todos/view" do 
-    @uncompleted_todos = Todo.where({"completed" => false})
-    @completed_todos = Todo.where({"completed" => true})
-    erb :"todos/view_all"
+MyApp.get "/todos/view" do
+  @current_user = User.get_current_user
+    if @current_user != nil 
+      @uncompleted_todos = Todo.where({"completed" => false})
+      @completed_todos = Todo.where({"completed" => true})
+      erb :"todos/view_all"
+    else
+      @message = "Must login to view to-do items."  
+      erb :"logins/new" 
+    end
   end
 
 MyApp.post "/todos/update" do

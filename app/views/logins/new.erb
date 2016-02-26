@@ -9,6 +9,10 @@
   <% end %>
   <% end %>
 
+<% if @message != nil %>
+  <%= @message %>
+  <% end %>
+
 <form style="width: 500px" method="post" action="/login/create">
 <fieldset>
 <br>Enter Your Email Address:

@@ -12,7 +12,12 @@
 <br><input type="text" name="description" placeholder="Task Description"><br>
 <br>Assign this Task:
 <% @users.each do |u| %>
-<input type="checkbox" name="users[]" value="<%= u.id %>"><%= u.name %>
+<input type="checkbox" name="users[]" value="<%= u.id %>">
+  <% if u.id == session["user_id"] %>
+    <i>Me</i>
+  <% else %>
+  <%= u.name %>
+<% end %>
 <% end %>
 <br>
 <select name="category_id">

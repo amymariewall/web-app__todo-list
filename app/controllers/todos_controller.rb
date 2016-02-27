@@ -5,6 +5,7 @@ MyApp.get "/todo/add" do
   if @current_user != nil
   @users = User.all
   @categories = Category.all
+  #add a thing that makes it "me" instead of the logged in users' name
   erb :"todos/add"
   else  
   redirect "/login"
@@ -16,17 +17,9 @@ MyApp.post "/todo/create" do
     if @current_user != nil
       
     todo = Todo.new(title: params["title"], description: params["description"], created_by_user_id: session["user_id"], category_id: params["category_id"], completed: false)
-    # new assignment with specified user id from params and newly created todo #item
     todo.save
-    user_ids = params["users"]
-      user_ids.each do |u|
-        assignment = Assignment.new(assigned_to_user_id: u, assigned_by_user_id: session["user_id"], todo_id: todo.id)
-        binding.pry
-        assignment.save
-        end
-      ##do |u|
-    #u.is_admin = false
-    #@message = "Successfully created #{todo.title} and assigned it to #{todo.user_name}!"
+   Assignment.create_assignments(params["users"], session["user_id"], todo.id)
+
     redirect "/todos/view"
 
     else

@@ -7,4 +7,15 @@ class Assignment < ActiveRecord::Base
         end
     end
 
+    def self.set_todos(assignments)
+      @todo_ids = []
+      assignments.each do |a|
+        @todo_ids << a.todo_id
+      end
+    end
+
+    def self.get_todos(assignments)
+      self.set_todos(assignments)
+      return @todo_ids
+    end 
 end

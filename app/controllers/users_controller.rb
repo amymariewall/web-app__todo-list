@@ -29,8 +29,11 @@ end
 
 MyApp.get "/user/view/:id" do
   @user = User.find_by_id(params[:id])
-  @completed_todos = Todo.where({"user_id" => params[:id]}, {"completed" => true})
-  @uncompleted_todos = Todo.where({"user_id" => params[:id]}, {"completed" => false})
+  @assignments = Assignment.where({"assigned_to_user_id" => params[:id]})
+  todo_ids = Assignment.get_todos(@assignments)
+  @completed_todos = Todo.where({"id" => todo_ids}).where({"completed" => true})
+  @uncompleted_todos = Todo.where({"id" => todo_ids}).where({"completed" => false})
+  binding.pry
   erb :"users/view"
 end
 
